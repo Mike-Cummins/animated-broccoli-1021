@@ -25,8 +25,8 @@ RSpec.describe 'Patient index' do
       visit patients_path  
 
       expect(page).to_not have_content(@patient_4.name)
-      expect(@patient_2.name).to appear_before(@patient_1)
-      expect(@patient_1.name).to appear_before(@patient_3)
+      expect(@patient_2.name).to appear_before(@patient_1.name)
+      expect(@patient_1.name).to appear_before(@patient_3.name)
     end
   end
 end
