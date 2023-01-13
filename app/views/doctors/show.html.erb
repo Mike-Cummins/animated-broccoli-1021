@@ -5,6 +5,9 @@
 <h3>Works at: <%= @hospital.name %></h3>
 <div id="patients">
 <h3>Patients: <% @doctor.patients.each do |patient|%></h3>
-  <h5 id="patient_<%= patient.id %>"><%= patient.name %></h5>
+  <div id="patient_<%= patient.id %>">
+    <p><%= patient.name %></p>
+    <%= button_to "Remove Patient", doctor_patient_path(@doctor.doctor_patient_find(patient)), method: :delete %>
+  </div>
 <% end %>
 </div>
