@@ -30,5 +30,23 @@ RSpec.describe 'Doctor Show' do
       expect(page).to_not have_content(@doctor_3.name)
       expect(page).to_not have_content(@doctor_4.name)
     end
+
+    it 'Displays the name of the hospital' do
+      visit "/doctors/#{@doctor_1.id}"
+
+      expect(page).to have_content(@hospital_1.name)
+      expect(page).to_not have_content(@hospital_2.name)
+    end
+
+    it 'Displays the names of each patient' do
+      visit "/doctors/#{@doctor_1.id}"
+
+      within "div#patients" do
+        expect(page).to have_content(@patient_1.name)
+        expect(page).to have_content(@patient_2.name)
+        expect(page).to_not have_content(@patient_3.name)
+        expect(page).to_not have_content(@patient_4.name)
+      end
+    end
   end
 end
