@@ -5,6 +5,6 @@
 <h3>Works at: <%= @hospital.name %></h3>
 <div id="patients">
 <h3>Patients: <% @doctor.patients.each do |patient|%></h3>
-  <h5><%= patient.name %></h5>
+  <h5 id="patient_<%= patient.id %>"><%= patient.name %></h5>
 <% end %>
 </div>

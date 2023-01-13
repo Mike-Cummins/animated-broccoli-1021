@@ -15,6 +15,7 @@ RSpec.describe 'Doctor Show' do
       @patient_4 = Patient.create!(name: "Zola Shepherd", age: 2)
       DoctorPatient.create!(doctor: @doctor_1, patient: @patient_1)
       DoctorPatient.create!(doctor: @doctor_1, patient: @patient_2)
+      DoctorPatient.create!(doctor: @doctor_2, patient: @patient_2)
       DoctorPatient.create!(doctor: @doctor_2, patient: @patient_4)
       DoctorPatient.create!(doctor: @doctor_3, patient: @patient_3)
       DoctorPatient.create!(doctor: @doctor_4, patient: @patient_3)
@@ -46,6 +47,20 @@ RSpec.describe 'Doctor Show' do
         expect(page).to have_content(@patient_2.name)
         expect(page).to_not have_content(@patient_3.name)
         expect(page).to_not have_content(@patient_4.name)
+      end
+    end   
+
+    it 'Has a button to remove a patient' do
+      visit "/doctors/#{@doctor_1.id}"
+
+      within "#patient_#{@patient_2.id}" do
+        click_on("Remove Patient")  
+      end
+
+      expect(current_path).to eq("/doctors/#{@doctor_1.id}")
+
+      within "div#patients" do
+        expect(page).to_not have_content(@patient_2.name)
       end
     end
   end
